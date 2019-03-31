@@ -1,1 +1,1 @@
-# challenge-intern
+# Internship-challenge

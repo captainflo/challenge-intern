@@ -1,0 +1,44 @@
+
+/******************* Card Message *********************/
+/****************************************************/
+h2{
+  margin-top: 20px;
+}
+
+.card{
+  margin-top: 20px;
+}
+.image-avatar{
+  float: left;
+  padding-right: 20px;
+}
+
+.started{
+  float: right;
+}
+
+.twitter{
+  color: #808080;
+  font-size: 15px;
+}
+
+#timestamp{
+  color: #808080;
+  font-size: 15px;
+}
+
+/* Button Star Message */
+.btn-message{
+  color: black;
+  border-color: black; 
+}
+
+/* Button Trash */
+.btn-trash{
+  background-color: #ff4007;
+}
+.fas{
+  color: #ffffff;
+}
+/*********************** End ************************/
+/****************************************************/
