@@ -1,55 +1,45 @@
 // Finction to print all Messages
 function printAllMessage(data){
   for (let i = 0; i < data.length; i++) {
+
+    var appendVar, btnVar;
+
     if (data[i].isTrashed == false){
       var time = moment(data[i].timestamp).format("LL")
-      $(".divUntrash").append(`
-      <div class="card" id="${data[i].id}">
-      <div class="card-body">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="image-avatar">
-                    <img id="avatar" src="${data[i].avatar}" alt="">
-                    <p id="handle" class="card-title">${data[i].handle}</p>
-                </div>
-                <span class="twitter">${data[i].source} |</span> <span id="timestamp">${time}</span>
-                <p id="score">Score: ${data[i].score}</p>
-                <p id="content" class="card-text">${data[i].content}.</p>
-            </div>
-            <div class="col-sm-12 col-md-4">
-                <div class="started">
-                    <button data-id="${data[i].id}" data-star="${data[i].isStarred}" class="star btn btn-message">Star Message!</button>
-                    <button class="trash btn btn-trash" data-id="${data[i].id}" data-trash="${data[i].isStarred}"><i class="fas fa-trash"></i></button>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>`)
-    } else{
-      $(".divTrash").append(`
-      <div class="card" id="${data[i].id}">
-      <div class="card-body">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="image-avatar">
-                    <img id="avatar" src="${data[i].avatar}" alt="">
-                    <p id="handle" class="card-title">${data[i].handle}</p>
-                </div>
-                <span class="twitter">${data[i].source} |</span><span id="timestamp">${data[i].timestamp}</span>
-                <p id="score">Score: ${data[i].score}</p>
-                <p id="content" class="card-text">${data[i].content}.</p>
-            </div>
-            <div class="col-sm-12 col-md-4">
-                <div class="started">
-                    <button data-id="${data[i].id}" data-star="${data[i].isStarred}" class="star btn btn-message">Star Message!</button>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>`)
+
+      appendVar = $(".divUntrash");
+      btnVar    = `<button class="trash btn btn-trash" data-id="${data[i].id}" data-trash="${data[i].isStarred}"><i class="fas fa-trash"></i></button>`;
+
+    } else {
+      appendVar = $(".divTrash");
+      btnVar    = '';
     }
-  }
+    appendVar.append(`
+          <div class="card" id="${data[i].id}">
+          <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="image-avatar">
+                        <img id="avatar" src="${data[i].avatar}" alt="">
+                        <p id="handle" class="card-title">${data[i].handle}</p>
+                    </div>
+                    <span class="twitter">${data[i].source} |</span> <span id="timestamp">${time}</span>
+                    <p id="score">Score: ${data[i].score}</p>
+                    <p id="content" class="card-text">${data[i].content}.</p>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="started">
+                        <button data-id="${data[i].id}" data-star="${data[i].isStarred}" class="star btn btn-message">Star Message!</button>
+                        ${btnVar}
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>`
+      );
+
   starChecked();
+}
 }
 
 // function count star
@@ -236,6 +226,40 @@ $("#buttonParent").on('click', '#btn2', function () {
   $(".divUntrash").show();
   $('.divTrash').hide();
 });
+
+
+$("#highlightButton").on("click", function(event){
+  event.preventDefault();
+  // turn user input lower case
+  var input = $("#highlight").val()
+
+  $(".card-text").each(function(){
+      // turn content to lower case
+      var content = $(this).text();
+      var searchMask = input;
+      //g modifier: global. All matches (don't return on first match)
+      //i modifier: insensitive. Case insensitive match (ignores case of [a-zA-Z])
+      var regEx = new RegExp(searchMask, "ig");
+
+      console.log(regEx)
+      
+      var replaceMask = `<span class="highlighted-text">${searchMask} </span>`;
+      $(this).html(content.replace(regEx, replaceMask));
+  });
+
+    // Send the GET request.
+    $.ajax("/api/content",{
+      type: "GET"
+    }).then(
+      function(data) {
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i].content);
+       
+        }
+
+      }
+    );
+})
 
 
 

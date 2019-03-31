@@ -65,5 +65,12 @@ module.exports = function(app) {
           res.json(dbscore);
        });
     });
+
+    // Get route for took all content Messages 
+    app.get("/api/content", function(req, res) {
+      db.Message.findAll({}).then(function(data) {
+        res.json(data);
+        });
+      });
 };
 
