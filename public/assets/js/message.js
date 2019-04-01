@@ -23,8 +23,8 @@ function printAllMessage(data){
                         <img id="avatar" src="${data[i].avatar}" alt="">
                         <p id="handle" class="card-title">${data[i].handle}</p>
                     </div>
-                    <span class="twitter">${data[i].source} |</span> <span id="timestamp">${time}</span>
-                    <p id="score">Score: ${data[i].score}</p>
+                    <span class="twitter">${data[i].source} |</span> <span class="timestamp">${time}</span>
+                    <p id="score">Score <i class="fas fa-star"></i>: ${data[i].score}</p>
                     <p id="content" class="card-text">${data[i].content}.</p>
                 </div>
                 <div class="col-sm-12 col-md-4">
@@ -98,10 +98,18 @@ star();
 function starChecked(){
   $(".star").each(function(){
     if($(this).data("star") === true){
-      $(this).css('background-color','#FFFF00');
+      $(this).css({
+        "background-color": '#D4AF37',
+        "border-color" : 'white',
+        "color" : '#fff'
+    });
       $(this).text('starred');
     }else{
-      $(this).css('background-color','#fff');
+      $(this).css({
+        'background-color':'#fff',
+        "border-color" : 'black',
+        "color" : 'black'
+      });
       $(this).text('Star Message!');
     }
   })
@@ -246,6 +254,14 @@ $("#highlightButton").on("click", function(event){
       var replaceMask = `<span class="highlighted-text">${searchMask} </span>`;
       $(this).html(content.replace(regEx, replaceMask));
   });
+
+//possible methode for hightlight
+// function myFunction() {
+//   var str = "Hello world, welcome to the universe.";
+//   var n = str.indexOf("e");
+//   document.getElementById("demo").innerHTML = n;
+// }
+
 
     // Send the GET request.
     $.ajax("/api/content",{

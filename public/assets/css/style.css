@@ -1,30 +1,65 @@
+.message-viewer{
+  color: #4c4c4c;
+  font-weight: 800;
+  font-size: 18px;
+  padding: 5px;
+}
+
+
+/* Input Search */
+.input-search{
+  height: 41px;
+  width: 140px;
+  border: 1px solid grey;;
+  padding: 7px;
+  margin: 5px 0px 0px 26px;
+}
 
 /******************* Card Message *********************/
 /****************************************************/
+
+/* Starred Font */
 h2{
   margin-top: 20px;
 }
 
+/* Box card */
 .card{
   margin-top: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+/* Image Avatar */
 .image-avatar{
   float: left;
   padding-right: 20px;
 }
-
+.image-avatar p {
+  padding-top: 5px; 
+  color: #4c4c4c;
+  font-weight: 800;
+  font-size: 14px;
+}
 .started{
   float: right;
 }
 
+/* Source */
 .twitter{
   color: #808080;
   font-size: 15px;
 }
 
-#timestamp{
+/* Time */
+.timestamp{
   color: #808080;
   font-size: 15px;
+}
+
+
+/* Icon Score */
+.fa-star{
+  color: 	#bf9b30;
 }
 
 /* Button Star Message */
@@ -37,14 +72,22 @@ h2{
 .btn-trash{
   background-color: #ff4007;
 }
-.fas{
+.fa-trash{
   color: #ffffff;
 }
 
-/*  */
+/* Text highligh */
 .highlighted-text{
   background-color: grey;
 }
 
+/* Remove line blue */
+.btn:focus {
+  outline: 0;
+  box-shadow: none !important;
+} 
+input[type="text"]{ 
+  outline: none;
+}
 /*********************** End ************************/
 /****************************************************/
