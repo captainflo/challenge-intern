@@ -5,6 +5,8 @@ function printAllMessage(data){
     var appendVar, btnVar;
 
     if (data[i].isTrashed == false){
+
+
       var time = moment(data[i].timestamp).format("LL")
 
       appendVar = $(".divUntrash");
@@ -236,6 +238,24 @@ $("#buttonParent").on('click', '#btn2', function () {
 });
 
 
+// Replace text but keep case Helper function 
+function matchCase(text, pattern) {
+  var result = '';
+
+  for(var i = 0; i < text.length; i++) {
+      var c = text.charAt(i);
+      var p = pattern.charCodeAt(i);
+
+      if(p >= 65 && p < 65 + 26) {
+          result += c.toUpperCase();
+      } else {
+          result += c.toLowerCase();
+      }
+  }
+  return result;
+}
+
+// Textlight function
 $("#highlightButton").on("click", function(event){
   event.preventDefault();
   // turn user input lower case
@@ -249,33 +269,23 @@ $("#highlightButton").on("click", function(event){
       $(".divUntrash").empty();
       $(".divTrash").empty();
 
-      // loop through data array
-      // for each arr item as 'data'...
+      // loop trought each data the content
       data.forEach(data => {
 
-        // assign content
-        var content = data.content;
+        // use RegEx to match input case-insensitive
+        var regEx = new RegExp(input, "ig");
+        var text = data.content
 
-        // create replacement var
-        var replaceMask = `<span class="highlighted-text">${input}</span>`;
+        // use helper func to replace matches
+        text = text.replace(regEx, function(match) {
+          return '<span class="highlighted-text">' + matchCase(input, match) + '</span>';        
+        });
 
-        // replace instances of input in content with replacement var
-        newContent = content.replace( input, replaceMask );
+        // reassign data content
+        data.content = text;
 
-        console.log( content )
-        // assign data content to the newContent
-        data.content = newContent;
-        
       });
-
+      // print All messages with the new content
       printAllMessage(data);
-
-    }
-  );
+  });
 });
-
-
-
-
-
-
