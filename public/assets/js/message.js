@@ -23,8 +23,8 @@ function printAllMessage(data){
                         <img id="avatar" src="${data[i].avatar}" alt="">
                         <p id="handle" class="card-title">${data[i].handle}</p>
                     </div>
-                    <span class="twitter">${data[i].source} |</span> <span class="timestamp">${time}</span>
-                    <p id="score">Score <i class="fas fa-star"></i>: ${data[i].score}</p>
+                    <span class="twitter">${data[i].source} |</span> <span id="timestamp">${time}</span>
+                    <p id="score">Score: ${data[i].score}</p>
                     <p id="content" class="card-text">${data[i].content}.</p>
                 </div>
                 <div class="col-sm-12 col-md-4">
@@ -239,43 +239,41 @@ $("#buttonParent").on('click', '#btn2', function () {
 $("#highlightButton").on("click", function(event){
   event.preventDefault();
   // turn user input lower case
-  var input = $("#highlight").val()
+  var input = $("#highlight").val();
 
-  $(".card-text").each(function(){
-      // turn content to lower case
-      var content = $(this).text();
-      var searchMask = input;
-      //g modifier: global. All matches (don't return on first match)
-      //i modifier: insensitive. Case insensitive match (ignores case of [a-zA-Z])
-      var regEx = new RegExp(searchMask, "ig");
+  // Send the GET request.
+  $.ajax("/api/content/" + input,{
+    type: "GET"
+  }).then(
+    function(data) {
+      $(".divUntrash").empty();
+      $(".divTrash").empty();
 
-      console.log(regEx)
-      
-      var replaceMask = `<span class="highlighted-text">${searchMask} </span>`;
-      $(this).html(content.replace(regEx, replaceMask));
-  });
+      // loop through data array
+      // for each arr item as 'data'...
+      data.forEach(data => {
 
-//possible methode for hightlight
-// function myFunction() {
-//   var str = "Hello world, welcome to the universe.";
-//   var n = str.indexOf("e");
-//   document.getElementById("demo").innerHTML = n;
-// }
+        // assign content
+        var content = data.content;
 
+        // create replacement var
+        var replaceMask = `<span class="highlighted-text">${input}</span>`;
 
-    // Send the GET request.
-    $.ajax("/api/content",{
-      type: "GET"
-    }).then(
-      function(data) {
-        for (let i = 0; i < data.length; i++) {
-          console.log(data[i].content);
-       
-        }
+        // replace instances of input in content with replacement var
+        newContent = content.replace( input, replaceMask );
 
-      }
-    );
-})
+        console.log( content )
+        // assign data content to the newContent
+        data.content = newContent;
+        
+      });
+
+      printAllMessage(data);
+
+    }
+  );
+});
+
 
 
 

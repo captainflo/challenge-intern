@@ -8,6 +8,8 @@
 // Requiring our models
 var db = require("../models");
 
+console.log(db.Message);
+
 // Routes
 //  =============================================================
 module.exports = function(app) {
@@ -67,8 +69,13 @@ module.exports = function(app) {
     });
 
     // Get route for took all content Messages 
-    app.get("/api/content", function(req, res) {
-      db.Message.findAll({}).then(function(data) {
+    app.get("/api/content/:input", function(req, res) {
+      db.Message.findAll({
+        where: {
+          // Operator for like in SQL from Sequelize
+          content: {[db.Op.like]: '%' + req.params.input + '%'}
+        }
+      }).then(function(data) {
         res.json(data);
         });
       });

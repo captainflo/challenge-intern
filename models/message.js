@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     timestamp: {
-      type: DataTypes.STRING
+      type: DataTypes.DATE
     },
     source: {
       type: DataTypes.TEXT,
@@ -30,6 +30,7 @@ module.exports = function(sequelize, DataTypes) {
     isTrashed: {
       type: DataTypes.BOOLEAN
     }
+    
 }, {
   timestamps: false
 });
