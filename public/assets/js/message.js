@@ -22,7 +22,7 @@ function printAllMessage(data){
                         <p id="handle" class="card-title">${data[i].handle}</p>
                     </div>
                     <span class="twitter">${data[i].source} |</span> <span id="timestamp">${time}</span>
-                    <p id="score">Score: ${data[i].score}</p>
+                    <p id="score">Score <i class="fas fa-star"></i>: ${data[i].score}</p>
                     <p id="content" class="card-text">${data[i].content}.</p>
                 </div>
                 <div class="col-sm-12 col-md-4">
