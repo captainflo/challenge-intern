@@ -1,14 +1,10 @@
 // Finction to print all Messages
 function printAllMessage(data){
   for (let i = 0; i < data.length; i++) {
-
     var appendVar, btnVar;
-
+    var time = moment(data[i].timestamp).format("LL")
+    
     if (data[i].isTrashed == false){
-
-
-      var time = moment(data[i].timestamp).format("LL")
-
       appendVar = $(".divUntrash");
       btnVar    = `<button class="trash btn btn-trash" data-id="${data[i].id}" data-trash="${data[i].isStarred}"><i class="fas fa-trash"></i></button>`;
 
@@ -260,6 +256,9 @@ $("#highlightButton").on("click", function(event){
   event.preventDefault();
   // turn user input lower case
   var input = $("#highlight").val();
+  
+  // empty my input
+  $( "#highlight" ).val('');
 
   // Send the GET request.
   $.ajax("/api/content/" + input,{
@@ -268,7 +267,7 @@ $("#highlightButton").on("click", function(event){
     function(data) {
       $(".divUntrash").empty();
       $(".divTrash").empty();
-
+      
       // loop trought each data the content
       data.forEach(data => {
 

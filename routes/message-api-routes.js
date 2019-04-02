@@ -8,8 +8,6 @@
 // Requiring our models
 var db = require("../models");
 
-console.log(db.Message);
-
 // Routes
 //  =============================================================
 module.exports = function(app) {
