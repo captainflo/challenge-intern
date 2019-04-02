@@ -10,7 +10,7 @@ git clone the repo
 ``` git clone https://github.com/captainflo/challenge-intern.git ```
 
 Install the package with npm:
-``` npm intall ```
+``` npm install ```
 
 Navigate to your chosen environment variable port, or 8080 if none specified
 ``` http://localhost:8080/ ```
